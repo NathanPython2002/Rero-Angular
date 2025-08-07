@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { User } from './user.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `<section><app-user /></section>`,
+  imports: [User],
+  standalone: true,
+  styles: [
+    `
+      :host {
+        color: #a144eb;
+      }
+    `,
+  ],
 })
 export class AppComponent {
-  title = 'Rero-Angular';
+  city = 'San Francisco';
 }
