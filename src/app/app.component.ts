@@ -4,7 +4,7 @@ import { User } from './user.component';
 @Component({
   selector: 'app-root',
   template: `
-    <section>
+    <section (mouseover)="onMouseOver()">
       <app-user></app-user>
 
       @if (isServerRunning) {
@@ -13,10 +13,12 @@ import { User } from './user.component';
       <p>No, the server is not running</p>
       }
 
-      <h2>Liste des utilisateurs :</h2>
+      <h2>Users list :</h2>
       @for (user of users; track user.id) {
       <p>{{ user.name }}</p>
       }
+
+      <p>{{ message }}</p>
     </section>
   `,
   imports: [User],
@@ -40,4 +42,11 @@ export class AppComponent {
     { id: 3, name: 'Jessica' },
     { id: 4, name: 'Poornima' },
   ];
+
+  isEditable = true; // Boolean flag to indicate if the component is editable
+  message = ''; // Message to display on mouseover
+
+  onMouseOver() {
+    this.message = 'Way to go 🚀';
+  }
 }
