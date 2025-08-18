@@ -18,8 +18,6 @@ import { User } from './user.component';
       <p>{{ user.name }}</p>
       }
     </section>
-
-    <div [contentEditable]="isEditable">This text can be edited</div>
   `,
   imports: [User],
   standalone: true,
@@ -42,6 +40,4 @@ export class AppComponent {
     { id: 3, name: 'Jessica' },
     { id: 4, name: 'Poornima' },
   ];
-
-  isEditable = true; // Boolean flag to indicate if the component is editable
 }
