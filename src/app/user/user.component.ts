@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Child } from '../child.component';
 import { Comments } from '../comments.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [Child, Comments],
+  imports: [Child, Comments, FormsModule],
   template: `
     <h1>Welcome to the user page!</h1>
 
@@ -77,7 +78,12 @@ import { Comments } from '../comments.component';
         my heart and is not at all copied and pasted.
       </p>
     </article>
+    <label for="framework">
+      Favorite Framework:
+      <input id="framework" type="text" [(ngModel)]="favoriteFramework" />
+    </label>
 
+    <p>Your favorite framework is: {{ favoriteFramework }}</p>
     @defer (on viewport) {
     <app-comments></app-comments>
     } @placeholder {
@@ -91,6 +97,7 @@ export class User {
   isServerRunning = true;
   isEditable = true;
   message = '';
+  favoriteFramework = '';
 
   users = [
     { id: 0, name: 'Sarah' },
