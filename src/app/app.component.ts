@@ -3,11 +3,19 @@ import { User } from './user.component';
 import { Child } from './child.component';
 import { Comments } from './comments.component';
 import { NgOptimizedImage } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [User, Child, Comments, NgOptimizedImage],
+  imports: [User, Child, Comments, NgOptimizedImage, RouterOutlet],
   template: `
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/user">User</a>
+    </nav>
+
+    <router-outlet></router-outlet>
+
     <section (mouseover)="onMouseOver()">
       <app-user name="Simran"></app-user>
 
