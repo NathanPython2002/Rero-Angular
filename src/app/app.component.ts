@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { User } from './user.component';
 import { Child } from './child.component';
 import { Comments } from './comments.component';
-
+import { NgOptimizedImage } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [User, Child, Comments],
+  imports: [User, Child, Comments, NgOptimizedImage],
   template: `
     <section (mouseover)="onMouseOver()">
       <app-user name="Simran"></app-user>
@@ -88,6 +88,7 @@ import { Comments } from './comments.component';
     } @loading (minimum 2s) {
     <p>Loading comments...</p>
     }
+    <img ngSrc="assets/logo.svg" alt="Angular logo" width="32" height="32" />
   `,
   styles: [
     `
