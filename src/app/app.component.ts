@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './user.component';
+import { Child } from './child.component';
 
 @Component({
   selector: 'app-root',
@@ -22,8 +23,10 @@ import { User } from './user.component';
     </section>
 
     <div [contentEditable]="isEditable">This text can be edited</div>
+    <app-child (addItemEvent)="addItem($event)"></app-child>
   `,
-  imports: [User],
+
+  imports: [User, Child],
   standalone: true,
   styles: [
     `
@@ -49,6 +52,10 @@ export class AppComponent {
   message = ''; // Message to display on mouseover
 
   onMouseOver() {
-    this.message = 'Way to go 🚀';
+    this.message = 'Way to go';
+  }
+
+  addItem(newItem: string) {
+    this.users.push({ id: this.users.length, name: newItem }); // Add the new item to the users list
   }
 }
