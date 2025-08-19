@@ -8,8 +8,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   imports: [NgOptimizedImage, RouterOutlet, RouterLink],
   template: `
     <nav>
-      <a [routerLink]="['/']">Home</a> |
-      <a [routerLink]="['/user']">User</a>
+      <a routerLink="/">Home</a> |
+      <a routerLink="/user">User</a>
     </nav>
 
     <router-outlet></router-outlet>
