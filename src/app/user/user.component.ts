@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   FormGroup,
   FormControl,
+  Validators,
 } from '@angular/forms';
 
 @Component({
@@ -104,7 +105,7 @@ import {
         Email
         <input type="email" formControlName="email" />
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="!profileForm.valid">Submit</button>
     </form>
 
     <p>Name: {{ profileForm.value.name }}</p>
@@ -135,8 +136,8 @@ export class User {
 
   // Formular reactive
   profileForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   showFramework() {
