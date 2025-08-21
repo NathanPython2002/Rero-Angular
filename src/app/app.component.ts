@@ -8,9 +8,9 @@ import { User } from './user.component';
       <app-user></app-user>
 
       @if (isServerRunning) {
-      <p>Yes, the server is running</p>
+        <p>Yes, the server is running</p>
       } @else {
-      <p>No, the server is not running</p>
+        <p>No, the server is not running</p>
       }
     </section>
   `,
