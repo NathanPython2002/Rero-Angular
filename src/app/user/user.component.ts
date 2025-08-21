@@ -1,22 +1,26 @@
 import { Component } from '@angular/core';
 import { Child } from '../child.component';
 import { Comments } from '../comments.component';
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [Child, Comments, FormsModule],
+  imports: [Child, Comments, FormsModule, ReactiveFormsModule],
   template: `
     <h1>Welcome to the user page!</h1>
 
-    <!-- Vérification si le serveur tourne -->
     <p *ngIf="isServerRunning; else serverStopped">
       Yes, the server is running
     </p>
-    <ng-template #serverStopped
-      ><p>No, the server is not running</p></ng-template
-    >
+    <ng-template #serverStopped>
+      <p>No, the server is not running</p>
+    </ng-template>
 
     <h2>Users list :</h2>
     <div *ngFor="let user of users; trackBy: trackById">
@@ -29,7 +33,6 @@ import { FormsModule } from '@angular/forms';
 
     <app-child (addItemEvent)="addItem($event)"></app-child>
 
-    <!-- Article complet répété -->
     <article>
       <p>
         Angular is my favorite framework, and this is why. Angular has the
@@ -83,7 +86,6 @@ import { FormsModule } from '@angular/forms';
       </p>
     </article>
 
-    <!-- Formulaire pour récupérer le framework préféré -->
     <label for="framework">
       Favorite Framework:
       <input id="framework" type="text" [(ngModel)]="favoriteFramework" />
@@ -92,7 +94,22 @@ import { FormsModule } from '@angular/forms';
     <p>Your favorite framework is: {{ favoriteFramework }}</p>
     <button (click)="showFramework()">Show Framework</button>
 
-    <!-- Chargement différé du composant Comments -->
+    <h2>Profile Form</h2>
+    <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
+      <label>
+        Name
+        <input type="text" formControlName="name" />
+      </label>
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+
+    <p>Name: {{ profileForm.value.name }}</p>
+    <p>Email: {{ profileForm.value.email }}</p>
+
     <ng-container *ngIf="commentsVisible; else placeholder">
       <app-comments></app-comments>
     </ng-container>
@@ -116,8 +133,18 @@ export class User {
     { id: 4, name: 'Poornima' },
   ];
 
+  // Formular reactive
+  profileForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+  });
+
   showFramework() {
     alert(this.favoriteFramework);
+  }
+
+  handleSubmit() {
+    alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email);
   }
 
   addItem(event: string) {
