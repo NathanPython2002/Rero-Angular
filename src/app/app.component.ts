@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CarService } from './car.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 
     <router-outlet></router-outlet>
 
+    <p>{{ carService.getCars() }}</p>
+
     <img ngSrc="assets/logo.svg" alt="Angular logo" width="32" height="32" />
   `,
   styles: [
@@ -24,4 +27,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
     `,
   ],
 })
-export class AppComponent {}
+export class AppComponent {
+  carService = inject(CarService);
+}
