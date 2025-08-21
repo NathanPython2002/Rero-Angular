@@ -10,22 +10,26 @@ import { FormsModule } from '@angular/forms';
   template: `
     <h1>Welcome to the user page!</h1>
 
-    @if (isServerRunning) {
-    <p>Yes, the server is running</p>
-    } @else {
-    <p>No, the server is not running</p>
-    }
+    <!-- Vérification si le serveur tourne -->
+    <p *ngIf="isServerRunning; else serverStopped">
+      Yes, the server is running
+    </p>
+    <ng-template #serverStopped
+      ><p>No, the server is not running</p></ng-template
+    >
 
     <h2>Users list :</h2>
-    @for (user of users; track user.id) {
-    <p>{{ user.name }}</p>
-    }
+    <div *ngFor="let user of users; trackBy: trackById">
+      <p>{{ user.name }}</p>
+    </div>
 
     <p>{{ message }}</p>
 
     <div [contentEditable]="isEditable">This text can be edited</div>
+
     <app-child (addItemEvent)="addItem($event)"></app-child>
 
+    <!-- Article complet répété -->
     <article>
       <p>
         Angular is my favorite framework, and this is why. Angular has the
@@ -78,19 +82,23 @@ import { FormsModule } from '@angular/forms';
         my heart and is not at all copied and pasted.
       </p>
     </article>
+
+    <!-- Formulaire pour récupérer le framework préféré -->
     <label for="framework">
       Favorite Framework:
       <input id="framework" type="text" [(ngModel)]="favoriteFramework" />
     </label>
 
     <p>Your favorite framework is: {{ favoriteFramework }}</p>
-    @defer (on viewport) {
-    <app-comments></app-comments>
-    } @placeholder {
-    <p>Future comments</p>
-    } @loading (minimum 2s) {
-    <p>Loading comments...</p>
-    }
+    <button (click)="showFramework()">Show Framework</button>
+
+    <!-- Chargement différé du composant Comments -->
+    <ng-container *ngIf="commentsVisible; else placeholder">
+      <app-comments></app-comments>
+    </ng-container>
+    <ng-template #placeholder>
+      <p>Future comments</p>
+    </ng-template>
   `,
 })
 export class User {
@@ -98,6 +106,7 @@ export class User {
   isEditable = true;
   message = '';
   favoriteFramework = '';
+  commentsVisible = false;
 
   users = [
     { id: 0, name: 'Sarah' },
@@ -107,11 +116,23 @@ export class User {
     { id: 4, name: 'Poornima' },
   ];
 
-  onMouseOver() {
-    this.message = 'Way to go 🚀';
+  showFramework() {
+    alert(this.favoriteFramework);
   }
 
   addItem(event: string) {
     this.users.push({ id: this.users.length, name: event });
+  }
+
+  trackById(index: number, user: any) {
+    return user.id;
+  }
+
+  loadComments() {
+    this.commentsVisible = true;
+  }
+
+  onMouseOver() {
+    this.message = 'Way to go 🚀';
   }
 }
