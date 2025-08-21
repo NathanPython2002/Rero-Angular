@@ -15,7 +15,7 @@ import { CarService } from './car.service';
 
     <router-outlet></router-outlet>
 
-    <p>{{ carService.getCars() }}</p>
+    <p>Car Listing: {{ display }}</p>
 
     <img ngSrc="assets/logo.svg" alt="Angular logo" width="32" height="32" />
   `,
@@ -29,4 +29,6 @@ import { CarService } from './car.service';
 })
 export class AppComponent {
   carService = inject(CarService);
+
+  display = this.carService.getCars().join(' ⭐️ ');
 }
