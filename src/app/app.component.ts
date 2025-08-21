@@ -8,18 +8,20 @@ import {
 } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CarService } from './car.service';
+import { ReversePipe } from './reverse.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    NgOptimizedImage,
-    RouterOutlet,
-    RouterLink,
-    LowerCasePipe,
-    DecimalPipe,
-    DatePipe,
-    CurrencyPipe,
+    NgOptimizedImage, // For optimized image loading
+    RouterOutlet, // For routing
+    RouterLink, // For router links
+    LowerCasePipe, // For lowercasing text
+    DecimalPipe, // For formatting numbers
+    DatePipe, // For formatting dates
+    CurrencyPipe, // For formatting currency
+    ReversePipe, // Custom reverse pipe
   ],
   template: `
     <nav>
@@ -31,6 +33,7 @@ import { CarService } from './car.service';
 
     <p>Car Listing: {{ display }}</p>
     <p>Username lowercased: {{ username | lowercase }}</p>
+    <p>Reverse Machine: {{ word | reverse }}</p>
 
     <h2>Pipes formatting demo</h2>
     <ul>
@@ -54,6 +57,7 @@ export class AppComponent {
   display = this.carService.getCars().join(' ⭐️ ');
 
   username = 'NathanPython2002';
+  word = 'AngularRocks';
 
   // Example data for pipes
   num = 7.234;
