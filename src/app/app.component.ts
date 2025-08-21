@@ -8,6 +8,7 @@ import { User } from './user.component';
       <app-user></app-user>
 
       @if (isServerRunning) {
+
       <p>Yes, the server is running</p>
       } @else {
       <p>No, the server is not running</p>
@@ -16,6 +17,7 @@ import { User } from './user.component';
       <h2>Liste des utilisateurs :</h2>
       @for (user of users; track user.id) {
       <p>{{ user.name }}</p>
+
       }
     </section>
   `,
@@ -33,6 +35,7 @@ export class AppComponent {
   city = 'San Francisco';
   isServerRunning = true; // Boolean flag to indicate server status
 
+
   users = [
     { id: 0, name: 'Sarah' },
     { id: 1, name: 'Amy' },
@@ -40,4 +43,5 @@ export class AppComponent {
     { id: 3, name: 'Jessica' },
     { id: 4, name: 'Poornima' },
   ];
+
 }
