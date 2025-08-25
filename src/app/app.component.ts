@@ -5,7 +5,9 @@ import { User } from './user.component';
   selector: 'app-root',
   template: `
     <section (mouseover)="onMouseOver()">
+
       <app-user name="Simran"></app-user>
+
 
       @if (isServerRunning) {
       <p>Yes, the server is running</p>
@@ -21,7 +23,9 @@ import { User } from './user.component';
       <p>{{ message }}</p>
     </section>
 
+
     <div [contentEditable]="isEditable">This text can be edited</div>
+
   `,
   imports: [User],
   standalone: true,

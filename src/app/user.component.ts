@@ -1,3 +1,4 @@
+
 import { Component, input } from '@angular/core';
 
 @Component({
@@ -8,3 +9,4 @@ import { Component, input } from '@angular/core';
 export class User {
   name = input<string>(); //  Input property for the user's name
 }
+
